@@ -12,6 +12,7 @@ import {
   SetMetadata,
   UseFilters,
   UseGuards,
+  UseInterceptors,
   UsePipes,
 } from '@nestjs/common';
 import { ForbiddenException } from 'src/common/exception/forbidden.exception';
@@ -24,8 +25,10 @@ import { ValidationPipe } from 'src/common/pipe/validation.pipe';
 import { RolesGuard } from 'src/common/guard/roles.guard';
 import { Roles } from 'src/common/decorator/roles.decorator';
 import { Reflector } from '@nestjs/core';
+import { LoggingInterceptor } from 'src/common/interceptor/logging.interceptor';
 
 @Controller('cats')
+@UseInterceptors(new LoggingInterceptor())
 // @UseGuards(new RolesGuard(new Reflector()))
 // @UseFilters(new HttpExceptionFilter())
 export class CatsController {
