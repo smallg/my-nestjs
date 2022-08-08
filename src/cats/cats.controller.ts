@@ -26,6 +26,7 @@ import { RolesGuard } from 'src/common/guard/roles.guard';
 import { Roles } from 'src/common/decorator/roles.decorator';
 import { Reflector } from '@nestjs/core';
 import { LoggingInterceptor } from 'src/common/interceptor/logging.interceptor';
+import { createCatSchema } from './schemas/cat.schema';
 
 @Controller('cats')
 @UseInterceptors(new LoggingInterceptor())
@@ -36,7 +37,7 @@ export class CatsController {
 
   @Post()
   @SetMetadata('roles', ['admin'])
-  // @UsePipes(new JoiValidationPipe(createCatSchema))
+  @UsePipes(new JoiValidationPipe(createCatSchema))
   async create(@Body() createCatDto: CreateCatDto) {
     // @Body(new ValidationPipe())
     this.catsService.create(createCatDto);

@@ -12,7 +12,7 @@ export class JoiValidationPipe implements PipeTransform {
   transform(value: any, metadata: ArgumentMetadata) {
     const { error } = this.schema.validate(value);
     if (error) {
-      throw new BadRequestException('Validation Failed');
+      throw new BadRequestException(`Validation Failed, ${error.message}`);
     }
     return value;
   }
