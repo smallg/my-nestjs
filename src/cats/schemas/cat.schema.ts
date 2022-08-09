@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import * as joi from 'joi';
+import mongoose from 'mongoose';
 
 export type CatDocument = Cat & Document;
 
